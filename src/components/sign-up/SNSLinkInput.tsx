@@ -45,7 +45,7 @@ export default function SNSLinkInput<T extends FieldValues>({
         <div className="w-1/4 flex justify-end py-1">
           {!linked ? (
             <Button
-              type="button"
+              htmlType="button"
               onClick={() => {
                 if (validator(value)) {
                   setLinked(true);
@@ -59,7 +59,8 @@ export default function SNSLinkInput<T extends FieldValues>({
             </Button>
           ) : (
             <Button
-              type="button"
+              htmlType="button"
+              variant="line"
               onClick={() => {
                 setLinked(false);
               }}

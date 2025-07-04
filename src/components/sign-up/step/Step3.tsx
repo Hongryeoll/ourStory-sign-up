@@ -45,7 +45,7 @@ export default function Step3() {
       />
 
       <div className="flex justify-between pt-4 gap-3">
-        <Button htmlType="button" onClick={goPrev}>
+        <Button htmlType="button" onClick={goPrev} variant="line">
           이전
         </Button>
         <Button

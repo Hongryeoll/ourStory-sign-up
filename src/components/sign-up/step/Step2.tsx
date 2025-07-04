@@ -28,11 +28,11 @@ export default function Step2() {
       <Input name="gender" label="성별" placeholder="male / female / other" />
 
       <div className="flex justify-between pt-4 gap-3">
-        <Button type="button" onClick={goPrev}>
+        <Button htmlType="button" onClick={goPrev} variant="line">
           이전
         </Button>
         <Button
-          type="submit"
+          htmlType="submit"
           onClick={handleSubmit(onSubmit)}
           disabled={!isValid || isSubmitting}
         >
