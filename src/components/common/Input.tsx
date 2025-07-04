@@ -37,7 +37,7 @@ export default function Input<T extends FieldValues>({
 
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="text-sm font-medium text-gray-600">
         {label}
       </label>
 
@@ -47,8 +47,8 @@ export default function Input<T extends FieldValues>({
             errorMessage
               ? "border-red-500"
               : isFocused
-              ? "border-gray-500"
-              : "border-gray-300"
+              ? "border-purple-500"
+              : "border-purple-300"
           }`}
         >
           <input
@@ -88,7 +88,7 @@ export default function Input<T extends FieldValues>({
           {value && (
             <button
               type="button"
-              onClick={() => setValue(name, "" as any)}
+              onClick={() => setValue(name, "" as T[typeof name])}
               className="ml-1"
             >
               <CloseSvg className="w-5 h-5 text-gray-400" />

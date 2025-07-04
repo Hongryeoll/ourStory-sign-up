@@ -26,8 +26,8 @@ export default function Button({
         w-full h-12 px-4 rounded-md font-semibold
         ${
           disabled
-            ? "bg-gray-300 text-white"
-            : "bg-pink-500 text-white hover:bg-pink-600"
+            ? "bg-purple-300 text-white"
+            : "bg-purple-500 text-white hover:bg-purple-600"
         }
         ${className}
       `}

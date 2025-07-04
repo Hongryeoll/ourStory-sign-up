@@ -6,6 +6,7 @@ import { useFormContext } from "react-hook-form";
 import { step2Schema } from "@/lib/schemas/step/step2";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
+import { Step2Data } from "@/types/signup";
 
 type FormData = z.infer<typeof step2Schema>;
 
@@ -17,7 +18,7 @@ export default function Step2() {
   } = useFormContext<FormData>();
 
   const onSubmit = (data: FormData) => {
-    setStepData("step2", data);
+    setStepData("step2", data as Step2Data);
     goNext();
   };
 
