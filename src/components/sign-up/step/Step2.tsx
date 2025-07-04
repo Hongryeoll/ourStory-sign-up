@@ -1,24 +1,29 @@
 "use client";
 
-import { z } from "zod";
 import { useSignupStore } from "@/hooks/useSignupStep";
 import { useFormContext } from "react-hook-form";
-import { step2Schema } from "@/lib/schemas/step/step2";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 import { Step2Data } from "@/types/signup";
 
-type FormData = z.infer<typeof step2Schema>;
-
 export default function Step2() {
   const { goNext, goPrev, setStepData } = useSignupStore();
-  const {
-    handleSubmit,
-    formState: { isValid, isSubmitting },
-  } = useFormContext<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    setStepData("step2", data as Step2Data);
+  const {
+    trigger,
+    getValues,
+    formState: { isSubmitting },
+  } = useFormContext();
+
+  const onSubmit = async () => {
+    const isStepValid = await trigger(["birthdate", "gender"]);
+    if (!isStepValid) return;
+
+    const values = getValues();
+    setStepData("step2", {
+      birthdate: values.birthdate,
+      gender: values.gender,
+    });
     goNext();
   };
 
@@ -31,11 +36,7 @@ export default function Step2() {
         <Button htmlType="button" onClick={goPrev} variant="line">
           이전
         </Button>
-        <Button
-          htmlType="submit"
-          onClick={handleSubmit(onSubmit)}
-          disabled={!isValid || isSubmitting}
-        >
+        <Button htmlType="button" onClick={onSubmit} disabled={isSubmitting}>
           다음
         </Button>
       </div>

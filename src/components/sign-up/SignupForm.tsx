@@ -17,12 +17,24 @@ export default function SignupForm() {
   const methods = useForm<SignupFormSchema>({
     resolver: zodResolver(fullSignupSchema),
     mode: "onChange",
-    defaultValues: {},
+    defaultValues: {
+      // Step1
+      username: "",
+      password: "",
+      email: "",
+      phone: "",
+      // Step2
+      birthdate: "",
+      gender: "",
+      // Step3
+      twitter: "",
+      instagram: "",
+    },
   });
 
   const onSubmit = (data: SignupFormSchema) => {
     console.log("🎉 전체 제출", data);
-    // API 연결 등 후처리
+    // 이후 API 요청 등 처리
   };
 
   return (
