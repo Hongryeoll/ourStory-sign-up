@@ -12,6 +12,8 @@ type InputProps<T extends FieldValues> = {
   label: string;
   type?: "text" | "password" | "email" | "tel";
   placeholder?: string;
+  className?: string;
+  disabled?: boolean;
 };
 
 export default function Input<T extends FieldValues>({
@@ -19,6 +21,8 @@ export default function Input<T extends FieldValues>({
   label,
   type = "text",
   placeholder = "",
+  disabled = false,
+  className = "",
 }: InputProps<T>) {
   const {
     register,
@@ -43,13 +47,16 @@ export default function Input<T extends FieldValues>({
 
       <div className="relative">
         <div
-          className={`flex items-center px-3 py-2 border rounded-md ${
-            errorMessage
-              ? "border-red-500"
-              : isFocused
-              ? "border-purple-500"
-              : "border-purple-300"
-          }`}
+          className={`flex items-center px-3 py-2 border rounded-md transition-all
+            ${
+              errorMessage
+                ? "border-red-500"
+                : isFocused
+                ? "border-purple-500"
+                : "border-purple-300"
+            }
+            ${disabled ? "bg-gray-100" : "bg-white"}
+          `}
         >
           <input
             id={name}
@@ -64,7 +71,8 @@ export default function Input<T extends FieldValues>({
                 target.value = target.value.replace(/\D/g, "");
               }
             }}
-            className="flex-1 outline-none text-sm text-gray-800 placeholder-gray-400"
+            className={`flex-1 outline-none text-sm text-gray-800 placeholder-gray-400 ${className}`}
+            disabled={disabled}
             {...register(name)}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
@@ -85,7 +93,7 @@ export default function Input<T extends FieldValues>({
           )}
 
           {/* X 버튼 */}
-          {value && (
+          {value && !disabled && (
             <button
               type="button"
               onClick={() => setValue(name, "" as T[typeof name])}

@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 9999s ease-out, color 9999s ease-out;
+  -webkit-text-fill-color: #111827 !important; /* Tailwind의 text-gray-900 */
+  caret-color: #111827;
+}
