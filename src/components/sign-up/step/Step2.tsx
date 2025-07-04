@@ -4,7 +4,6 @@ import { useSignupStore } from "@/hooks/useSignupStep";
 import { useFormContext } from "react-hook-form";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
-import { Step2Data } from "@/types/signup";
 
 export default function Step2() {
   const { goNext, goPrev, setStepData } = useSignupStore();

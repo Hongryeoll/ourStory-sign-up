@@ -1,19 +1,12 @@
 "use client";
 
-import {
-  useFormContext,
-  useFormState,
-  useWatch,
-  useTrigger,
-} from "react-hook-form";
-import { Step1Data } from "@/types/signup";
+import { useFormContext } from "react-hook-form";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 import { useSignupStore } from "@/hooks/useSignupStep";
 
 export default function Step1() {
   const {
-    handleSubmit,
     trigger,
     getValues,
     formState: { isSubmitting },
