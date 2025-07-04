@@ -15,7 +15,7 @@ interface SignupStore {
   goNext: () => void;
   goPrev: () => void;
   setStepData: <K extends keyof StepData>(key: K, data: StepData[K]) => void;
-  reset: () => void;
+  resetStep: () => void;
 }
 
 export const useSignupStore = create<SignupStore>((set) => ({
@@ -36,7 +36,7 @@ export const useSignupStore = create<SignupStore>((set) => ({
         [key]: data,
       },
     })),
-  reset: () =>
+    resetStep: () =>
     set(() => ({
       step: 1,
       stepData: {},

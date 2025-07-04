@@ -12,7 +12,7 @@ type FormData = z.infer<typeof step3Schema>;
 
 export default function Step3() {
   const router = useRouter();
-  const { goPrev, setStepData } = useSignupStore();
+  const { goPrev, setStepData, resetStep } = useSignupStore();
   const {
     handleSubmit,
     formState: { isSubmitting },
@@ -25,6 +25,7 @@ export default function Step3() {
     console.log(">>signUpData", data);
 
     reset();
+    resetStep();
     router.push("/");
   };
 
