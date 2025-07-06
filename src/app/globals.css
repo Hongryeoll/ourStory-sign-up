@@ -9,9 +9,15 @@ input:-webkit-autofill:active {
   caret-color: #111827;
 }
 
+/* 선택된 Day에 #8b5cf6 설정 */
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
   background-color: #8b5cf6 !important;
   color: white !important;
   border-radius: 9999px;
+}
+
+/* 해당 Month의 Day가 아닌 Day에 #d1d5db 설정 */
+.react-datepicker__day--outside-month {
+  color: #d1d5db !important;
 }

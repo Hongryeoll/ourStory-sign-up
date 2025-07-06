@@ -9,7 +9,6 @@ import Button from "@/components/common/Button";
 const genderOptions = [
   { label: "남성", value: "male" },
   { label: "여성", value: "female" },
-  { label: "기타", value: "other" },
 ];
 
 export default function Step2() {
@@ -42,7 +41,6 @@ export default function Step2() {
         options={genderOptions}
         placeholder="성별 선택"
       />
-
       <div className="flex justify-between pt-4 gap-3">
         <Button htmlType="button" onClick={goPrev} variant="line">
           이전
