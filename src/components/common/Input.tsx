@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { useFormContext, FieldValues, Path, FieldError } from "react-hook-form";
-
 import CloseSvg from "@/style/icon/x-circle.svg";
 import ViewSvg from "@/style/icon/view.svg";
 import ViewHideSvg from "@/style/icon/view-slash.svg";
@@ -14,6 +13,8 @@ type InputProps<T extends FieldValues> = {
   placeholder?: string;
   className?: string;
   disabled?: boolean;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function Input<T extends FieldValues>({
@@ -23,6 +24,8 @@ export default function Input<T extends FieldValues>({
   placeholder = "",
   disabled = false,
   className = "",
+  value,
+  onChange,
 }: InputProps<T>) {
   const {
     register,
@@ -31,13 +34,21 @@ export default function Input<T extends FieldValues>({
     formState: { errors },
   } = useFormContext<T>();
 
-  const value = watch(name);
+  const watchedValue = watch(name); // uncontrolled용
+  const isControlled = value !== undefined && onChange !== undefined;
   const [isFocused, setIsFocused] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
   const inputType = type === "password" && showPwd ? "text" : type;
 
   const errorMessage = (errors?.[name as string] as FieldError | undefined)
     ?.message;
+
+  const handleClear = () => {
+    setValue(name, "" as T[typeof name]);
+    if (isControlled && onChange) {
+      onChange({ target: { value: "" } } as ChangeEvent<HTMLInputElement>);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-1">
@@ -73,12 +84,13 @@ export default function Input<T extends FieldValues>({
             }}
             className={`flex-1 outline-none text-sm text-gray-800 placeholder-gray-400 ${className}`}
             disabled={disabled}
-            {...register(name)}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
+            {...(isControlled ? { value, onChange } : { ...register(name) })}
           />
+
           {/* 비밀번호 보기 토글 */}
-          {type === "password" && value && (
+          {type === "password" && (isControlled ? value : watchedValue) && (
             <button
               type="button"
               onClick={() => setShowPwd((prev) => !prev)}
@@ -93,12 +105,8 @@ export default function Input<T extends FieldValues>({
           )}
 
           {/* X 버튼 */}
-          {value && !disabled && (
-            <button
-              type="button"
-              onClick={() => setValue(name, "" as T[typeof name])}
-              className="ml-1"
-            >
+          {(isControlled ? value : watchedValue) && !disabled && (
+            <button type="button" onClick={handleClear} className="ml-1">
               <CloseSvg className="w-5 h-5 text-gray-400" />
             </button>
           )}

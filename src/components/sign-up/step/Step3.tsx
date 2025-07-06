@@ -23,29 +23,26 @@ export default function Step3() {
   const onSubmit = (data: FormData) => {
     setStepData("step3", data);
     toast.success("회원가입 데이터가 저장되었습니다.");
-    console.log(">>signUpData", data);
-
+    console.log(">> signUpData", data);
     reset();
     resetStep();
-    router.push("/");
+    router.replace("/");
   };
 
   return (
     <div className="space-y-4">
       <SNSLinkInput<FormData>
         name="twitter"
-        label="Twitter 계정 URL"
-        placeholder="https://twitter.com/yourname"
-        validator={(url) => url.startsWith("https://twitter.com/")}
+        label="Twitter 계정"
+        placeholder="예: ourStory123"
+        baseDomain="twitter.com"
       />
-
       <SNSLinkInput<FormData>
         name="instagram"
-        label="Instagram 계정 URL"
-        placeholder="https://instagram.com/yourname"
-        validator={(url) => url.startsWith("https://instagram.com/")}
+        label="Instagram 계정"
+        placeholder="예: ourStory123"
+        baseDomain="instagram.com"
       />
-
       <div className="flex justify-between pt-4 gap-3">
         <Button htmlType="button" onClick={goPrev} variant="line">
           이전

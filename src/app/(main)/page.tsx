@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleStartSignup = () => {
-    router.push("/sign-up");
+    router.push("/sign-up", { scroll: false });
   };
 
   return (
