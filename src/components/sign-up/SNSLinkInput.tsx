@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useFormContext, FieldValues, Path } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 
@@ -50,7 +51,7 @@ export default function SNSLinkInput<T extends FieldValues>({
                 if (validator(value)) {
                   setLinked(true);
                 } else {
-                  alert("유효한 URL을 입력해주세요.");
+                  toast.error("유효한 URL을 입력해주세요.");
                 }
               }}
               className="w-full min-w-[60px] h-[38px]"

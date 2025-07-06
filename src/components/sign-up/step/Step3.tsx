@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 import { useSignupStore } from "@/hooks/useSignupStep";
 import { useFormContext } from "react-hook-form";
 import { step3Schema } from "@/lib/schemas/step/step3";
@@ -21,7 +22,7 @@ export default function Step3() {
 
   const onSubmit = (data: FormData) => {
     setStepData("step3", data);
-    alert("✅ 회원가입 데이터가 저장되었습니다.");
+    toast.success("회원가입 데이터가 저장되었습니다.");
     console.log(">>signUpData", data);
 
     reset();
