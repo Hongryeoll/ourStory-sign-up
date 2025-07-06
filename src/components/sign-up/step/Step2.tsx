@@ -2,8 +2,15 @@
 
 import { useSignupStore } from "@/hooks/useSignupStep";
 import { useFormContext } from "react-hook-form";
-import Input from "@/components/common/Input";
+import DatePickerInput from "@/components/common/DatePickerInput";
+import Selectbox from "@/components/common/Selectbox";
 import Button from "@/components/common/Button";
+
+const genderOptions = [
+  { label: "남성", value: "male" },
+  { label: "여성", value: "female" },
+  { label: "기타", value: "other" },
+];
 
 export default function Step2() {
   const { goNext, goPrev, setStepData } = useSignupStore();
@@ -28,8 +35,13 @@ export default function Step2() {
 
   return (
     <div className="space-y-4">
-      <Input name="birthdate" label="생년월일" placeholder="YYYY-MM-DD" />
-      <Input name="gender" label="성별" placeholder="male / female / other" />
+      <DatePickerInput name="birthdate" label="생년월일" />
+      <Selectbox
+        name="gender"
+        label="성별"
+        options={genderOptions}
+        placeholder="성별 선택"
+      />
 
       <div className="flex justify-between pt-4 gap-3">
         <Button htmlType="button" onClick={goPrev} variant="line">

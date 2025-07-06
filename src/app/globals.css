@@ -5,6 +5,13 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 9999s ease-out, color 9999s ease-out;
-  -webkit-text-fill-color: #111827 !important; /* Tailwind의 text-gray-900 */
+  -webkit-text-fill-color: #111827 !important;
   caret-color: #111827;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #8b5cf6 !important;
+  color: white !important;
+  border-radius: 9999px;
 }
