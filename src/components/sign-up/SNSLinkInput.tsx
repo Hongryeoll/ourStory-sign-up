@@ -17,6 +17,7 @@ interface SNSLinkInputProps {
   label: string;
   placeholder: string;
   baseDomain: string;
+  onLinkChange?: (linked: boolean) => void;
 }
 
 export default function SNSLinkInput({
@@ -24,6 +25,7 @@ export default function SNSLinkInput({
   label,
   placeholder,
   baseDomain,
+  onLinkChange,
 }: SNSLinkInputProps) {
   const { watch, setValue, control } = useFormContext<FormData>();
   const { field } = useController({ name, control });
@@ -51,6 +53,7 @@ export default function SNSLinkInput({
       setValue(name, fullUrl);
       toast.success(`${label}이 성공적으로 연동되었습니다.`);
       setLinked(true);
+      onLinkChange?.(true);
     } else {
       toast.error(
         result.error.errors[0]?.message || "유효하지 않은 계정입니다."
@@ -89,7 +92,10 @@ export default function SNSLinkInput({
             <Button
               htmlType="button"
               variant="line"
-              onClick={() => setLinked(false)}
+              onClick={() => {
+                setLinked(false);
+                onLinkChange?.(false);
+              }}
               className="w-full min-w-[60px] h-[38px]"
             >
               수정
