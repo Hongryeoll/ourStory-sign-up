@@ -35,7 +35,7 @@ export default function Step1() {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="space-y-4">
         <Input name="username" label="아이디" />
         <Input name="password" label="비밀번호" type="password" />
         <Input name="email" label="이메일" type="email" />
