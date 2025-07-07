@@ -7,17 +7,16 @@ Next.js의 App Router 기능을 활용하여 **인터셉팅 라우팅 기반(Sig
 ## 🚀 프로젝트 실행 방법
 
 ```bash
-# 1. 패키지 설치
-npm install
 
-# 2. 개발 서버 실행
-npm run dev
+# 개발 환경 실행
+1. npm install
+2. npm run dev
 
-# 3. 빌드
-npm run build
+# 배포 환경 실행
+1. npm install
+2. npm run build
+3. npm run start
 
-# 4. 프로덕션 서버 실행
-npm run start
 ```
 
 ## 🛠️ 기술 스택 및 선택 이유
