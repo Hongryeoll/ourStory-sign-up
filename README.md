@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 단계별 회원가입 폼 구현
 
-## Getting Started
+Next.js의 App Router 기능을 활용하여 **인터셉팅 라우팅 기반(Sign-Up 모달 구조)** 으로 구현된 회원가입 프로세스입니다.  
+사용자는 `/signup/step1`, `/signup/step2`, `/signup/step3` 경로를 순차적으로 이동하며 가입 절차를 완료할 수 있습니다.  
+라우팅 이동 시에도 백그라운드 UI가 유지되어 **모달처럼 자연스럽게 흐름을 유지**하는 UX를 제공합니다.
 
-First, run the development server:
+## 🚀 프로젝트 실행 방법
 
 ```bash
+# 1. 패키지 설치
+npm install
+
+# 2. 개발 서버 실행
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# 3. 빌드
+npm run build
+
+# 4. 프로덕션 서버 실행
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ 기술 스택 및 선택 이유
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| 기술 스택                  | 선택 이유                                                                                                              |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **TypeScript**             | 정적 타입 검사를 통해 런타임 오류를 사전에 방지하고, IDE 자동완성과 리팩토링에 유리하여 유지보수성이 뛰어납니다.       |
+| **React**                  | 컴포넌트 기반 UI 구조 덕분에 재사용성과 확장성이 높고, 대규모 상태 관리를 구조화하기에 적합합니다.                     |
+| **React Hook Form**        | 폼 상태 관리에 최적화된 경량 라이브러리로, 성능 저하 없이 각 단계별 입력 필드의 유효성 검증이 가능합니다.              |
+| **Zod**                    | 폼 유효성 스키마를 TypeScript와 함께 정의할 수 있어 안정성과 생산성이 뛰어나고, 각 스텝의 필드 단위 검증에 적합합니다. |
+| **Zustand**                | 리액트 외부에서도 접근 가능한 간단한 글로벌 상태 관리 라이브러리로, 다단계 폼 간 데이터 공유 및 유지에 효과적입니다.   |
+| **Tailwind CSS**           | 유틸리티 퍼스트 접근 방식으로 빠른 스타일링과 반응형 디자인 구현이 가능하며, 유지보수 및 커스터마이징에 강력합니다.    |
+| **Lucide Icons**           | 가볍고 직관적인 SVG 아이콘 세트로, 모던한 UI/UX를 구성하는 데 효과적입니다.                                            |
+| **React Toastify / Modal** | 기본 `alert()` 대신 사용자 친화적인 알림 컴포넌트를 제공하여, 입력 오류나 완료 상태를 더 명확하게 전달할 수 있습니다.  |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> ✅ **Zod + React Hook Form + Zustand** 조합을 통해 **폼 단계별 검증** 및 **최종 제출 시 전체 유효성 체크**를 구조적으로 처리하였습니다.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🗂 폴더 구조
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📦src
+┣ 📂app
+┃ ┣ 📂(main)/@modal/(.)sign-up/page.tsx # 인터셉팅 라우팅 기반 회원가입 모달 라우트
+┃ ┣ 📂sign-up/page.tsx # 베이스 페이지
+┃ ┗ 📜layout.tsx # 전체 페이지 레이아웃 구성
+┣ 📂components
+┃ ┣ 📂common # Input, Button, DatePicker 등 공용 컴포넌트
+┃ ┗ 📂sign-up/step # Step1~3 단계별 컴포넌트 구성
+┣ 📂hooks
+┃ ┗ 📜useSignupStep.ts # 현재 스텝 이동/관리 훅
+┣ 📂lib
+┃ ┣ 📂schemas/step # 각 단계별 Zod 스키마
+┃ ┗ 📜formResolver.ts # zodResolver 통합 스키마
+┣ 📂style/icon # SVG 아이콘 모음
+┗ 📂types
+┗ 📜signup.ts # 회원가입 관련 타입 선언
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
