@@ -35,6 +35,8 @@ export default function RootLayout({
               background: "#faf5ff",
               color: "#6b21a8",
               border: "1px solid #c084fc",
+              maxWidth: "600px",
+              textAlign: "center",
             },
             success: {
               iconTheme: {
