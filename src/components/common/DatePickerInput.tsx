@@ -47,12 +47,12 @@ export default function DatePickerInput({
           return (
             <div className="relative">
               <div
-                className={`relative border rounded-md bg-white shadow-sm transition-all py-2 px-3
+                className={`relative border rounded-md bg-white transition-all py-2 px-3
                 ${
                   fieldState.error
-                    ? "border-red-500 shadow-[0_0_0_2px_rgba(239,68,68,0.3)]"
+                    ? "border-red-500"
                     : isFocused
-                    ? "border-purple-500 shadow-[0_0_0_2px_rgba(168,85,247,0.3)]"
+                    ? "border-purple-500"
                     : "border-gray-300"
                 }`}
               >
@@ -121,11 +121,11 @@ export default function DatePickerInput({
                         {/* Year Picker */}
                         <Listbox value={currentYear} onChange={changeYear}>
                           <div className="relative flex-1">
-                            <ListboxButton className="relative w-full rounded-md border border-gray-300 bg-white py-1 px-3 text-sm pr-6 shadow-sm">
+                            <ListboxButton className="relative w-full rounded-md border border-gray-300 bg-white py-1 px-3 text-sm pr-6">
                               {currentYear}년
                               <ChevronUpDownSVG className="w-4 h-4 absolute right-2 top-1/2 -translate-y-1/2 text-gray-400" />
                             </ListboxButton>
-                            <ListboxOptions className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5">
+                            <ListboxOptions className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm ring-1 ring-black ring-opacity-5">
                               {years.map((year) => (
                                 <ListboxOption key={year} value={year}>
                                   {({ selected }) => (
@@ -148,11 +148,11 @@ export default function DatePickerInput({
                         {/* Month Picker */}
                         <Listbox value={currentMonth} onChange={changeMonth}>
                           <div className="relative flex-1">
-                            <ListboxButton className="relative w-full rounded-md border border-gray-300 bg-white py-1 px-3 text-sm pr-6 shadow-sm">
+                            <ListboxButton className="relative w-full rounded-md border border-gray-300 bg-white py-1 px-3 text-sm pr-6">
                               {months[currentMonth]}
                               <ChevronUpDownSVG className="w-4 h-4 absolute right-2 top-1/2 -translate-y-1/2 text-gray-400" />
                             </ListboxButton>
-                            <ListboxOptions className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5">
+                            <ListboxOptions className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm ring-1 ring-black ring-opacity-5">
                               {months.map((month, idx) => (
                                 <ListboxOption key={month} value={idx}>
                                   {({ selected }) => (

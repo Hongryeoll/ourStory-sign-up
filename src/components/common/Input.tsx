@@ -36,7 +36,6 @@ export default function Input<T extends FieldValues>({
 
   const watchedValue = watch(name); // uncontrolled용
   const isControlled = value !== undefined && onChange !== undefined;
-  const [isFocused, setIsFocused] = useState(false);
   const [showPwd, setShowPwd] = useState(false);
   const inputType = type === "password" && showPwd ? "text" : type;
 
@@ -59,15 +58,13 @@ export default function Input<T extends FieldValues>({
       <div className="relative">
         <div
           className={`flex items-center px-3 py-2 border rounded-md transition-all
-            ${
-              errorMessage
-                ? "border-red-500"
-                : isFocused
-                ? "border-purple-500"
-                : "border-purple-300"
-            }
-            ${disabled ? "bg-gray-100" : "bg-white"}
-          `}
+          ${
+            errorMessage
+              ? "border-red-500"
+              : "border-gray-300 focus-within:border-purple-500"
+          }
+          ${disabled ? "bg-gray-100" : "bg-white"}
+        `}
         >
           <input
             id={name}
@@ -84,8 +81,6 @@ export default function Input<T extends FieldValues>({
             }}
             className={`flex-1 outline-none text-sm text-gray-800 placeholder-gray-400 ${className}`}
             disabled={disabled}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
             {...(isControlled ? { value, onChange } : { ...register(name) })}
           />
 
