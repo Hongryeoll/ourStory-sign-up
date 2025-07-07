@@ -1,32 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import {
-  useFormContext,
-  FieldValues,
-  Path,
-  useController,
-  PathValue,
-} from "react-hook-form";
+import { useFormContext, useController } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { step3Schema } from "@/lib/schemas/step/step3";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 
-interface SNSLinkInputProps<T extends FieldValues> {
-  name: Path<T>;
+type FormData = {
+  twitter?: string;
+  instagram?: string;
+};
+
+interface SNSLinkInputProps {
+  name: "twitter" | "instagram";
   label: string;
   placeholder: string;
   baseDomain: string;
 }
 
-export default function SNSLinkInput<T extends FieldValues>({
+export default function SNSLinkInput({
   name,
   label,
   placeholder,
   baseDomain,
-}: SNSLinkInputProps<T>) {
-  const { watch, setValue, control } = useFormContext<T>();
+}: SNSLinkInputProps) {
+  const { watch, setValue, control } = useFormContext<FormData>();
   const { field } = useController({ name, control });
   const [linked, setLinked] = useState(false);
   const rawValue = watch(name);
@@ -39,17 +38,17 @@ export default function SNSLinkInput<T extends FieldValues>({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newUrl = formatUrl(e.target.value);
-    field.onChange(newUrl as PathValue<T, Path<T>>);
+    field.onChange(newUrl);
   };
 
   const handleLink = () => {
     const fullUrl = formatUrl(username);
-    const fieldSchema = step3Schema.shape[name as "twitter" | "instagram"];
+    const fieldSchema = step3Schema.shape[name];
 
     const result = fieldSchema.safeParse(fullUrl);
 
     if (result.success) {
-      setValue(name, fullUrl as PathValue<T, Path<T>>);
+      setValue(name, fullUrl);
       toast.success(`${label}이 성공적으로 연동되었습니다.`);
       setLinked(true);
     } else {

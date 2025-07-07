@@ -22,7 +22,7 @@ export default function Step3() {
 
   const onSubmit = (data: FormData) => {
     setStepData("step3", data);
-    toast.success("회원가입 데이터가 저장되었습니다.");
+    toast.success("회원가입이 성공적으로 완료되었어요! 😊");
     console.log(">> signUpData", data);
     reset();
     resetStep();
@@ -31,13 +31,13 @@ export default function Step3() {
 
   return (
     <div className="space-y-4">
-      <SNSLinkInput<FormData>
+      <SNSLinkInput
         name="twitter"
         label="Twitter 계정"
         placeholder="예: ourStory123"
         baseDomain="twitter.com"
       />
-      <SNSLinkInput<FormData>
+      <SNSLinkInput
         name="instagram"
         label="Instagram 계정"
         placeholder="예: ourStory123"

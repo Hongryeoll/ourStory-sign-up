@@ -11,7 +11,7 @@ export const step3Schema = z.object({
       .string()
       .optional()
       .refine((val) => !val || twitterRegex.test(val), {
-        message: "유효한 Twitter 계정 주소를 입력해주세요.",
+        message: "유효한 Twitter 계정을 입력해주세요.",
       })
   ) as ZodType<string | undefined>,
 
@@ -21,7 +21,7 @@ export const step3Schema = z.object({
       .string()
       .optional()
       .refine((val) => !val || instagramRegex.test(val), {
-        message: "유효한 Instagram 계정 주소를 입력해주세요.",
+        message: "유효한 Instagram 계정을 입력해주세요.",
       })
   ) as ZodType<string | undefined>,
 });
